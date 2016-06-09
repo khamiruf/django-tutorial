@@ -1,23 +1,22 @@
-from django.conf.urls import url
-
+from django.conf.urls import url, include
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
-# app_name = 'polls'
-# urlpatterns = [
-#     # ex: /polls/
-#     url(r'^$', views.index, name='index'),
-#     # ex: /polls/5/
-#     url(r'^specifics/(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
-#     # ex: /polls/5/results/
-#     url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
-#     # ex: /polls/5/vote/
-#     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
-# ]
 
 app_name = 'polls'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
+    url(r'^results/(?P<pk>[0-9]+)/$', views.ResultsView.as_view(), name='results'),
+    url(r'^users/$', views.user_list.as_view(), name='user-list'),
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^qns/$', views.question_list.as_view(), name='qns'),
+    url(r'^cho/$', views.choice_list.as_view(), name='cho'),
+    url(r'^qnsc/$', views.create_question.as_view(), name='qnsc'),
+    url(r'^choc/$', views.create_choice.as_view(), name='choc'),
+    url(r'^qns_cho/$', views.qns_choice_list.as_view(), name='choc'),
+
+#    url(r'^users/(?P<pk>[0-9]+)/$', views.question_list.as_view(), name='user-detail'),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
