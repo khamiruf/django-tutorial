@@ -32,9 +32,16 @@ class user_detail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = user_serializer
 
+
 class qns_choice_list(generics.ListAPIView):
     queryset = Question.objects.all()
     serializer_class = qns_choice_serializer
+
+class create_qns_choice(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = qns_choice_serializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
 
     # def perform_create(self, serializer):
     #     serializer.save(True)

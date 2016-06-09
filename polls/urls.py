@@ -14,7 +14,8 @@ urlpatterns = [
     url(r'^cho/$', views.choice_list.as_view(), name='cho'),
     url(r'^qnsc/$', views.create_question.as_view(), name='qnsc'),
     url(r'^choc/$', views.create_choice.as_view(), name='choc'),
-    url(r'^qns_cho/$', views.qns_choice_list.as_view(), name='choc'),
+    url(r'^qns_cho/$', views.qns_choice_list.as_view(), name='qns_cho'),
+    url(r'^qnsc_choc/$', views.create_qns_choice.as_view(), name='qnsc_choc'),
 
 #    url(r'^users/(?P<pk>[0-9]+)/$', views.question_list.as_view(), name='user-detail'),
 ]
