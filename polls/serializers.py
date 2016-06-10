@@ -32,3 +32,14 @@ class qns_choice_serializer(serializers.ModelSerializer):
         for o_choice in choice_data:
             Choice.objects.create(question=question, **o_choice)
         return question
+
+class mod_qns_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('question_text', 'pub_date',)
+
+    def update(self, instance, validated_data):
+        instance.question_text = validated_data.get('question_text', instance.question_text)
+        instance.pub_date = validated_data.get('pub_date', instance.pub_date)
+        instance.save()
+        return instance

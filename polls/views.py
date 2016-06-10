@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt
-from polls.serializers import question_serializer, user_serializer, choice_serializer, qns_choice_serializer
+from polls.serializers import * #question_serializer, user_serializer, choice_serializer, qns_choice_serializer,
 
 from rest_framework import status
 # from rest_framework.decorators import api_view
@@ -32,6 +32,11 @@ class user_detail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = user_serializer
 
+
+class RUD_qns(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = mod_qns_serializer
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 class qns_choice_list(generics.ListAPIView):
     queryset = Question.objects.all()
