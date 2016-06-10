@@ -17,7 +17,7 @@ class question_serializer(serializers.ModelSerializer):
 class choice_serializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
-        fields = ('choice_text',)
+        fields = ('question', 'choice_text',)
 
 class qns_choice_serializer(serializers.ModelSerializer):
     choice_set = choice_serializer(many=True)   #, read_only=True

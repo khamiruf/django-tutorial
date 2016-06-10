@@ -36,7 +36,7 @@ class user_detail(generics.RetrieveAPIView):
 class RUD_qns(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = mod_qns_serializer
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
 class qns_choice_list(generics.ListAPIView):
     queryset = Question.objects.all()
@@ -45,7 +45,7 @@ class qns_choice_list(generics.ListAPIView):
 class create_qns_choice(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = qns_choice_serializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
 
     # def perform_create(self, serializer):
@@ -70,12 +70,12 @@ class question_list(generics.ListAPIView):
 class create_question(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = question_serializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
 class create_choice(generics.ListCreateAPIView):
     queryset = Choice.objects.all()
     serializer_class = choice_serializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
 
 class IndexView(generic.ListView):
