@@ -1,26 +1,18 @@
 from rest_framework import serializers
 from .models import Question, Choice
-from django.contrib.auth.models import User
 
-class user_serializer(serializers.ModelSerializer):
-    question = serializers.PrimaryKeyRelatedField(many=True, queryset=Question.objects.all())
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'question', )
-
-class question_serializer(serializers.ModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ('question_text',)
 
-class choice_serializer(serializers.ModelSerializer):
+class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
         fields = ('question', 'choice_text',)
 
-class qns_choice_serializer(serializers.ModelSerializer):
-    choice_set = choice_serializer(many=True)   #, read_only=True
+class QnsChoiceSerializer(serializers.ModelSerializer):
+    choice_set = ChoiceSerializer(many=True)
 
     class Meta:
         model = Question
@@ -33,7 +25,7 @@ class qns_choice_serializer(serializers.ModelSerializer):
             Choice.objects.create(question=question, **o_choice)
         return question
 
-class mod_qns_serializer(serializers.ModelSerializer):
+class ModifyQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ('question_text', 'pub_date',)
