@@ -6,32 +6,11 @@ from django.views import generic
 from .models import Choice, Question
 from django.utils import timezone
 from django.http import HttpResponse
-
 from .serializers import *
-
 from rest_framework import generics
-
-from django.db import IntegrityError, transaction
 from datetime import datetime
 
 from django.contrib.auth.models import User
-
-@transaction.atomic
-def MultipleDBTransaction(request):
-
-    # return HttpResponse("testing")
-
-    try:
-        # newQns = Question.objects.create(question_text='new question', pub_date=datetime.now(), owner=User.objects.all()[0])
-        # Choice.objects.create(question=newQns, choice_text='choice 1', votes=0)
-        newQns = Question.objects.get(id=29)
-        newQns.delete()
-
-    except (IntegrityError, KeyError, Question.DoesNotExist):
-        # Redisplay the question voting form.
-        return HttpResponse("Error: ???")
-    else:
-        return HttpResponse("Success: ???")
 
 class MultipleObjectList(generics.ListAPIView):
     questions = Question.objects.all()
@@ -54,7 +33,6 @@ class ChoiceList(generics.ListCreateAPIView):
 class QuestionList(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
