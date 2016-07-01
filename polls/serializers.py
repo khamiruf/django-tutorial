@@ -35,3 +35,7 @@ class ModifyQuestionSerializer(serializers.ModelSerializer):
         instance.pub_date = validated_data.get('pub_date', instance.pub_date)
         instance.save()
         return instance
+
+class MultipleObjectSerializer(serializers.ModelSerializer):
+    question = QuestionSerializer()
+    choice = ChoiceSerializer()

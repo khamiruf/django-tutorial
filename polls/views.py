@@ -11,6 +11,34 @@ from .serializers import *
 
 from rest_framework import generics
 
+from django.db import IntegrityError, transaction
+from datetime import datetime
+
+from django.contrib.auth.models import User
+
+@transaction.atomic
+def MultipleDBTransaction(request):
+
+    # return HttpResponse("testing")
+
+    try:
+        # newQns = Question.objects.create(question_text='new question', pub_date=datetime.now(), owner=User.objects.all()[0])
+        # Choice.objects.create(question=newQns, choice_text='choice 1', votes=0)
+        newQns = Question.objects.get(id=29)
+        newQns.delete()
+
+    except (IntegrityError, KeyError, Question.DoesNotExist):
+        # Redisplay the question voting form.
+        return HttpResponse("Error: ???")
+    else:
+        return HttpResponse("Success: ???")
+
+class MultipleObjectList(generics.ListAPIView):
+    questions = Question.objects.all()
+    choices = Choice.objects.all()
+
+    serializer_class = MultipleObjectSerializer
+
 class ModifyQuestion(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = ModifyQuestionSerializer
@@ -36,7 +64,6 @@ class IndexView(generic.ListView):
         return Question.objects.filter(
             pub_date__lte=timezone.now()
         ).order_by('-pub_date')#[:5]
-
 
 class DetailView(generic.DetailView):
     model = Question
