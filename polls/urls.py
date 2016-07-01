@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^question_choice/$', views.QuestionChoiceList.as_view(), name='question_choice'),
 
     url(r'^modify_question/(?P<pk>[0-9]+)/$', views.ModifyQuestion.as_view(), name='modify_question'),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

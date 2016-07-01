@@ -1,0 +1,57 @@
+[
+{
+  "model": "polls.choice",
+  "pk": 20,
+  "fields": {
+    "question": 31,
+    "choice_text": "Question 1",
+    "votes": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 21,
+  "fields": {
+    "question": 31,
+    "choice_text": "Question 2",
+    "votes": 0
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 22,
+  "fields": {
+    "question": 31,
+    "choice_text": "Question 3",
+    "votes": 0
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$24000$T0kjOyGaRCKk$0XFV+++oJbCYDrX/p+ZyVNWHcEEfYCdNF08jR+mEKX8=",
+    "last_login": "2016-07-01T18:47:51.914Z",
+    "is_superuser": true,
+    "username": "postgres",
+    "first_name": "",
+    "last_name": "",
+    "email": "abc@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2016-06-06T07:11:38.787Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 31,
+  "fields": {
+    "question_text": "Test Question",
+    "pub_date": "2016-07-01T18:48:06Z",
+    "owner": [
+      "postgres"
+    ]
+  }
+}
+]
